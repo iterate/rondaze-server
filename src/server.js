@@ -73,7 +73,6 @@ app._router.stack.forEach((r) => {
 });
 
 initializeDatabase().then(() => {
-    app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${port}`);
+    app.listen(port, '0.0.0.0', () => {
     });
 });
