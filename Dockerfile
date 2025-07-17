@@ -1,20 +1,18 @@
 FROM node:20-alpine
 
-  WORKDIR /
-  
-  COPY package*.json ./
-  RUN npm install
-  
-  COPY . .
-  RUN npm run build
-  
-  # ---- Production Stage ----
-  FROM nginx:alpine
-  
-  RUN rm -rf /usr/share/nginx/html/*
-  COPY --from=build /build /usr/share/nginx/html
-  COPY nginx.conf /etc/nginx/conf.d/default.conf
-  
-  EXPOSE 8080
-  CMD ["nginx", "-g", "daemon off;"]
-  
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --only=production
+
+# Copy source code
+COPY src/ ./src/
+
+# Expose the port the app runs on
+EXPOSE 3002
+
+# Start the server
+CMD ["npm", "start"]
