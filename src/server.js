@@ -1,14 +1,14 @@
-import express from 'express';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
 
-import setRoutes from './routes/highScoresRoutes.js'; 
+import setRoutes from './routes/highScoresRoutes.js';
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 8080;
 
 // Enable CORS
 app.use(cors());
